@@ -1,4 +1,3 @@
-
 class Contact:
 
     def __init__(self, name, surname, number, favorite_contact=False, *args, **kwargs):
@@ -18,20 +17,40 @@ class Contact:
                f'В Избранных: {self.favorite_contact}\n' \
                f'Дополнительная информация: \n\t{self.kwargs}'
 
-    def write_to_data(self):
-        with open('data.txt', 'w') as file:
-            file.write(f'Имя: {self.name}\n'
-               f'Фамилия: {self.surname}\n'
-               f'Номер телефона: {self.number}\n'
-               f'В Избранных: {self.favorite_contact}\n'
-               f'Дополнительная информация: \n\t{self.kwargs}')
-
-    def main(self):
-        self.write_to_data()
 
 jhon = Contact('Jhon', 'Smith', '+71234567809', telegram='@jhony', email='jhony@smith.com')
-print(Contact)
-jhon.main()
+sam = Contact('Sam', 'Brooks', '+78757392920', favorite_contact='да', telegram='@sam', email='sam@brooks.ru')
 
 
+
+class Phonebook:
+
+    def __init__(self, name):
+        self.name = name
+        self.contacts = dict()
+
+    def add_number(self, contact, name):
+        self.contacts[name] = contact
+
+    def find_number(self, name):
+        return str(self.contacts[name])
+
+    def delete_number(self, number):
+        for name in self.contacts:
+            if number in self.contacts[name]:
+                print('found')
+
+
+
+    def __str__(self):
+        return str(self.contacts)
+
+
+if __name__ == '__main__':
+    phonebook = Phonebook('sasha')
+    phonebook.add_number(jhon, 'Джон')
+    phonebook.add_number(sam, 'Сэм')
+    phonebook.delete_number('+71234567809')
+    # print(phonebook.find_number('Джон'))
+    # print(phonebook)
         
