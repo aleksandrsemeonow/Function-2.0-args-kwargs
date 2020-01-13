@@ -32,15 +32,21 @@ class Phonebook:
     def add_number(self, contact, name):
         self.contacts[name] = contact
 
-    def find_number(self, name):
-        return str(self.contacts[name])
+    def find_number(self, surname):
+        for name in self.contacts:
+            if surname in self.contacts[name].name or surname in self.contacts[name].surname:
+                print(self.contacts[name])
 
     def delete_number(self, number):
         for name in self.contacts:
-            if number in self.contacts[name]:
-                print('found')
+            if number in self.contacts[name].number:
+                del self.contacts[name]
+                break
 
-
+    def find_favorite_contact(self):
+        for name in self.contacts:
+            if self.contacts[name].favorite_contact!=False:
+                print(self.contacts[name])
 
     def __str__(self):
         return str(self.contacts)
@@ -50,7 +56,7 @@ if __name__ == '__main__':
     phonebook = Phonebook('sasha')
     phonebook.add_number(jhon, 'Джон')
     phonebook.add_number(sam, 'Сэм')
+    # phonebook.find_favorite_contact()
     phonebook.delete_number('+71234567809')
-    # print(phonebook.find_number('Джон'))
-    # print(phonebook)
-        
+    # phonebook.find_number('Jhon')
+    print(phonebook)
